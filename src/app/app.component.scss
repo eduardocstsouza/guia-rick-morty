@@ -1,0 +1,14 @@
+ion-item {
+  margin: 4px 8px;
+  --border-radius: 8px;
+}
+
+ion-item.item-ativo {
+  --color: var(--ion-color-primary);
+  --background: rgba(151, 206, 76, 0.12);
+  font-weight: 600;
+
+  ion-icon {
+    color: var(--ion-color-primary);
+  }
+}

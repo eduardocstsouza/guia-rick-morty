@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="estado-vazio">
+    <ion-icon name="heart-dislike-outline" aria-hidden="true"></ion-icon>
+    <h2>Nenhum favorito salvo</h2>
+    <p>Explore a lista de personagens e salve seus preferidos para acessá-los aqui.</p>
+    <ion-button routerLink="/personagens" color="primary">
+      <ion-icon slot="start" name="people-outline" aria-hidden="true"></ion-icon>
+      Explorar personagens
+    </ion-button>
+  </div>
+</ion-content>

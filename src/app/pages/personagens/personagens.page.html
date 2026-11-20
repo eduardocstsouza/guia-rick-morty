@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Personagens</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="filtros">
+    <ion-searchbar placeholder="Buscar personagem por nome..." [debounce]="300"></ion-searchbar>
+
+    <ion-segment value="todos" [scrollable]="true">
+      <ion-segment-button value="todos">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="alive">
+        <ion-label>Vivos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="dead">
+        <ion-label>Mortos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="unknown">
+        <ion-label>Desconhecidos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      @for (personagem of personagensExemplo; track personagem.id) {
+      <ion-col size="12" sizeMd="6" sizeLg="4">
+        <ion-card button [routerLink]="['/personagens', personagem.id]" class="personagem-card">
+          <img [src]="personagem.imagem" [alt]="personagem.nome" />
+
+          <ion-card-header>
+            <ion-card-title>{{ personagem.nome }}</ion-card-title>
+            <ion-card-subtitle>{{ personagem.especie }}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <div class="card-rodape">
+              <ion-badge color="primary">{{ personagem.status }}</ion-badge>
+              <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+
+  <div class="paginacao">
+    <ion-button fill="outline" size="small" [disabled]="true">
+      <ion-icon slot="start" name="chevron-back-outline" aria-hidden="true"></ion-icon>
+      Anterior
+    </ion-button>
+
+    <span>Página 1</span>
+
+    <ion-button fill="outline" size="small" [disabled]="true">
+      Próxima
+      <ion-icon slot="end" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+    </ion-button>
+  </div>
+</ion-content>
