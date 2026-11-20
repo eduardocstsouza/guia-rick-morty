@@ -1,3 +1,24 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-header>
+      <ion-toolbar color="dark">
+        <ion-title>Guia Rick &amp; Morty</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list lines="none">
+        @for (pagina of paginas; track pagina.url) {
+          <ion-menu-toggle autoHide="false">
+            <ion-item button [routerLink]="pagina.url" routerLinkActive="item-ativo">
+              <ion-icon slot="start" [name]="pagina.icone" aria-hidden="true"></ion-icon>
+              <ion-label>{{ pagina.titulo }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        }
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>
