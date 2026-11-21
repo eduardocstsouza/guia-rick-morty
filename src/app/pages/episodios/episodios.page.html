@@ -11,10 +11,10 @@
   <ion-list [inset]="true">
     @for (episodio of episodiosExemplo; track episodio.id) {
     <ion-item>
-      <ion-badge slot="start" color="secondary">{{ episodio.codigo }}</ion-badge>
+      <ion-badge slot="start" color="secondary">{{ episodio.codigo | episodeCode }}</ion-badge>
       <ion-label>
-        <h2>{{ episodio.nome }}</h2>
-        <p>{{ episodio.dataExibicao }} · {{ episodio.personagens }} personagens</p>
+        <h2>{{ episodio.nome | uppercase }}</h2>
+        <p>{{ episodio.dataExibicao | date:'dd/MM/yyyy' }} · {{ episodio.personagens }} personagens</p>
       </ion-label>
     </ion-item>
     }
