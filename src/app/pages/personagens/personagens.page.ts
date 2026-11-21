@@ -26,6 +26,8 @@ import {
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, chevronForwardOutline, heartOutline } from 'ionicons/icons';
 
+import { StatusPtPipe } from '../../pipes/status-pt.pipe';
+
 @Component({
   selector: 'app-personagens',
   templateUrl: './personagens.page.html',
@@ -53,6 +55,7 @@ import { chevronBackOutline, chevronForwardOutline, heartOutline } from 'ionicon
     IonTitle,
     IonToolbar,
     RouterLink,
+    StatusPtPipe,
   ],
 })
 export class PersonagensPage {
