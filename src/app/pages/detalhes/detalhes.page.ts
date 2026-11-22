@@ -10,6 +10,8 @@ import { StatusBadgeDirective } from '../../directives/status-badge.directive';
 import { RickMortyApiService } from '../../services/rick-morty-api.service';
 import { Personagem } from '../../models/personagem.model';
 import { StatusPtPipe } from '../../pipes/status-pt.pipe';
+import { EspeciePtPipe } from '../../pipes/especie-pt.pipe';
+import { GeneroPtPipe } from '../../pipes/genero-pt.pipe';
 
 @Component({
   selector: 'app-detalhes',
@@ -21,7 +23,7 @@ import { StatusPtPipe } from '../../pipes/status-pt.pipe';
     IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle,
     IonContent, IonSpinner, IonCard, IonCardHeader,
     IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonBadge,
-    StatusBadgeDirective, StatusPtPipe
+    StatusBadgeDirective, StatusPtPipe, EspeciePtPipe, GeneroPtPipe
   ],
 })
 export class DetalhesPage implements OnInit, OnDestroy {

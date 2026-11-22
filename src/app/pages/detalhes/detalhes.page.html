@@ -21,14 +21,14 @@
       <ion-card-header>
         <ion-card-title>{{ personagem.name }}</ion-card-title>
         <ion-card-subtitle>
-          {{ personagem.species }} -
           <ion-badge [appStatusBadge]="personagem.status">{{ personagem.status | statusPt }}</ion-badge>
         </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
         <p><strong>Origem:</strong> {{ personagem.origin.name }}</p>
         <p><strong>Localização:</strong> {{ personagem.location.name }}</p>
-        <p><strong>Gênero:</strong> {{ personagem.gender }}</p>
+        <p><strong>Espécie:</strong> {{ personagem.species | especiePt }}</p>
+        <p><strong>Gênero:</strong> {{ personagem.gender | generoPt }}</p>
       </ion-card-content>
     </ion-card>
   }
