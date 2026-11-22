@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {
@@ -18,7 +17,7 @@ import { StatusPtPipe } from '../../pipes/status-pt.pipe';
   styleUrls: ['./detalhes.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, RouterLink,
+    RouterLink,
     IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle,
     IonContent, IonSpinner, IonCard, IonCardHeader,
     IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonBadge,

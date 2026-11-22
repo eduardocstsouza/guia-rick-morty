@@ -8,25 +8,29 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div *ngIf="carregando" style="text-align:center; margin-top:40px;">
-    <ion-spinner></ion-spinner>
-    <p>Carregando...</p>
-  </div>
-  <p *ngIf="erro">{{ erro }}</p>
-  <ion-card *ngIf="personagem" style="max-width: 500px; margin: 0 auto;">
-    <img [src]="personagem.image" [alt]="personagem.name" style="width:100%; height:auto; display:block;" />
-    <ion-card-header>
-      <ion-card-title>{{ personagem.name }}</ion-card-title>
-      <ion-card-subtitle>
-        {{ personagem.species }} -
-        <ion-badge [appStatusBadge]="personagem.status">{{ personagem.status | statusPt }}</ion-badge>
-      </ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <p><strong>Origem:</strong> {{ personagem.origin.name }}</p>
-      <p><strong>Localização:</strong> {{ personagem.location.name }}</p>
-      <p><strong>Gênero:</strong> {{ personagem.gender }}</p>
-    </ion-card-content>
-  </ion-card>
+  @if (carregando) {
+    <div style="text-align:center; margin-top:40px;">
+      <ion-spinner></ion-spinner>
+      <p>Carregando...</p>
+    </div>
+  } @else if (erro) {
+    <p>{{ erro }}</p>
+  } @else if (personagem; as personagem) {
+    <ion-card style="max-width: 500px; margin: 0 auto;">
+      <img [src]="personagem.image" [alt]="personagem.name" style="width:100%; height:auto; display:block;" />
+      <ion-card-header>
+        <ion-card-title>{{ personagem.name }}</ion-card-title>
+        <ion-card-subtitle>
+          {{ personagem.species }} -
+          <ion-badge [appStatusBadge]="personagem.status">{{ personagem.status | statusPt }}</ion-badge>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Origem:</strong> {{ personagem.origin.name }}</p>
+        <p><strong>Localização:</strong> {{ personagem.location.name }}</p>
+        <p><strong>Gênero:</strong> {{ personagem.gender }}</p>
+      </ion-card-content>
+    </ion-card>
+  }
   <ion-button expand="block" routerLink="/personagens">Voltar para lista</ion-button>
 </ion-content>
