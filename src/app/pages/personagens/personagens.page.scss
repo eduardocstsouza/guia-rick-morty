@@ -19,11 +19,33 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+}
 
-    ion-icon {
-      font-size: 20px;
-      color: var(--ion-color-tertiary);
-    }
+.personagem-item {
+  position: relative;
+}
+
+// Botão irmão do card (e não filho) para não aninhar elemento clicável dentro do link do card.
+.btn-favorito {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--ion-color-tertiary);
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 22px;
   }
 }
 

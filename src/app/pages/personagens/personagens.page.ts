@@ -6,12 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonMenuButton, IonRow, IonSearchbar, IonSegment, IonSegmentButton, IonTitle, IonToolbar } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { chevronBackOutline, chevronForwardOutline, heartOutline } from 'ionicons/icons';
+import { chevronBackOutline, chevronForwardOutline, heart, heartOutline } from 'ionicons/icons';
 
 import { DestaqueDirective } from '../../directives/destaque.directive';
 import { StatusBadgeDirective } from '../../directives/status-badge.directive';
 import type { Personagem } from '../../models/personagem.model';
 import { StatusPtPipe } from '../../pipes/status-pt.pipe';
+import { FavoritosService } from '../../services/favoritos.service';
 import { RickMortyApiService } from '../../services/rick-morty-api.service';
 import { EspeciePtPipe } from '../../pipes/especie-pt.pipe';
 
@@ -23,6 +24,7 @@ import { EspeciePtPipe } from '../../pipes/especie-pt.pipe';
 })
 export class PersonagensPage implements OnInit {
   private api = inject(RickMortyApiService);
+  protected readonly favoritosService = inject(FavoritosService);
 
   personagens = signal<Personagem[]>([]);
   termoBusca = signal('');
@@ -36,7 +38,7 @@ export class PersonagensPage implements OnInit {
   private timerBusca: any;
 
   constructor() {
-    addIcons({ chevronBackOutline, chevronForwardOutline, heartOutline });
+    addIcons({ chevronBackOutline, chevronForwardOutline, heart, heartOutline });
   }
 
   ngOnInit(): void {
@@ -82,6 +84,10 @@ export class PersonagensPage implements OnInit {
     this.filtroStatus.set(novoStatus);
     this.paginaAtual.set(1);
     this.carregar();
+  }
+
+  alternarFavorito(personagem: Personagem): void {
+    this.favoritosService.alternar(personagem);
   }
 
   proximo(): void {
