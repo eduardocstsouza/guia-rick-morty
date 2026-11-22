@@ -5,10 +5,12 @@ import { Subscription } from 'rxjs';
 import {
   IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle,
   IonContent, IonSpinner, IonCard, IonCardHeader,
-  IonCardTitle, IonCardSubtitle, IonCardContent, IonButton
+  IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonBadge
 } from '@ionic/angular';
+import { StatusBadgeDirective } from '../../directives/status-badge.directive';
 import { RickMortyApiService } from '../../services/rick-morty-api.service';
 import { Personagem } from '../../models/personagem.model';
+import { StatusPtPipe } from '../../pipes/status-pt.pipe';
 
 @Component({
   selector: 'app-detalhes',
@@ -19,7 +21,8 @@ import { Personagem } from '../../models/personagem.model';
     CommonModule, RouterLink,
     IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle,
     IonContent, IonSpinner, IonCard, IonCardHeader,
-    IonCardTitle, IonCardSubtitle, IonCardContent, IonButton
+    IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonBadge,
+    StatusBadgeDirective, StatusPtPipe
   ],
 })
 export class DetalhesPage implements OnInit, OnDestroy {

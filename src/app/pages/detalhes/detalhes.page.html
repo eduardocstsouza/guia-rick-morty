@@ -17,7 +17,10 @@
     <img [src]="personagem.image" [alt]="personagem.name" style="width:100%; height:auto; display:block;" />
     <ion-card-header>
       <ion-card-title>{{ personagem.name }}</ion-card-title>
-      <ion-card-subtitle>{{ personagem.species }} - {{ personagem.status }}</ion-card-subtitle>
+      <ion-card-subtitle>
+        {{ personagem.species }} -
+        <ion-badge [appStatusBadge]="personagem.status">{{ personagem.status | statusPt }}</ion-badge>
+      </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <p><strong>Origem:</strong> {{ personagem.origin.name }}</p>
