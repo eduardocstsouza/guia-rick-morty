@@ -33,7 +33,7 @@
           <img [src]="personagem.image" [alt]="personagem.name" loading="lazy" onerror="this.src='https://rickandmortyapi.com/api/character/avatar/1.jpeg'" />
           <ion-card-header>
             <ion-card-title>{{ personagem.name }}</ion-card-title>
-            <ion-card-subtitle>{{ personagem.species }}</ion-card-subtitle>
+            <ion-card-subtitle>{{ personagem.species | especiePt }}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             <div class="card-rodape">

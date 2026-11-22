@@ -13,12 +13,13 @@ import { StatusBadgeDirective } from '../../directives/status-badge.directive';
 import type { Personagem } from '../../models/personagem.model';
 import { StatusPtPipe } from '../../pipes/status-pt.pipe';
 import { RickMortyApiService } from '../../services/rick-morty-api.service';
+import { EspeciePtPipe } from '../../pipes/especie-pt.pipe';
 
 @Component({
   selector: 'app-personagens',
   templateUrl: './personagens.page.html',
   styleUrls: ['./personagens.page.scss'],
-  imports: [CommonModule, FormsModule, IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonMenuButton, IonRow, IonSearchbar, IonSegment, IonSegmentButton, IonTitle, IonToolbar, RouterLink, StatusPtPipe, StatusBadgeDirective, DestaqueDirective],
+  imports: [CommonModule, FormsModule, IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonMenuButton, IonRow, IonSearchbar, IonSegment, IonSegmentButton, IonTitle, IonToolbar, RouterLink, StatusPtPipe, EspeciePtPipe, StatusBadgeDirective, DestaqueDirective],
 })
 export class PersonagensPage implements OnInit {
   private api = inject(RickMortyApiService);
