@@ -18,6 +18,8 @@ import {
 import { addIcons } from 'ionicons';
 import { heartOutline, peopleOutline, planetOutline, tvOutline } from 'ionicons/icons';
 
+import { DestaqueDirective } from '../../directives/destaque.directive';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -37,6 +39,7 @@ import { heartOutline, peopleOutline, planetOutline, tvOutline } from 'ionicons/
     IonTitle,
     IonToolbar,
     RouterLink,
+    DestaqueDirective,
   ],
 })
 export class HomePage {

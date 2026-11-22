@@ -20,7 +20,7 @@
   </div>
 
   @for(atalho of atalhos; track atalho.rota){
-  <ion-card button [routerLink]="atalho.rota" class="atalho-card">
+  <ion-card button [routerLink]="atalho.rota" class="atalho-card" appDestaque>
     <ion-card-header>
       <ion-icon [name]="atalho.icone" [color]="atalho.cor" aria-hidden="true"></ion-icon>
       <ion-card-title>{{ atalho.titulo }}</ion-card-title>
