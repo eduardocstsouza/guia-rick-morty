@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonMenuButton, IonRow, IonSearchbar, IonSegment, IonSegmentButton, IonTitle, IonToolbar } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, chevronForwardOutline, heartOutline } from 'ionicons/icons';
+import { DestaqueDirective } from '../../directives/destaque.directive';
 import { StatusBadgeDirective } from '../../directives/status-badge.directive';
 import { RickMortyApiService } from '../../services/rick-morty-api.service';
 import { Personagem } from '../../models/personagem.model';
@@ -14,7 +15,7 @@ import { StatusPtPipe } from '../../pipes/status-pt.pipe';
   selector: 'app-personagens',
   templateUrl: './personagens.page.html',
   styleUrls: ['./personagens.page.scss'],
-  imports: [CommonModule, FormsModule, IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonMenuButton, IonRow, IonSearchbar, IonSegment, IonSegmentButton, IonTitle, IonToolbar, RouterLink, StatusPtPipe, StatusBadgeDirective],
+  imports: [CommonModule, FormsModule, IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonMenuButton, IonRow, IonSearchbar, IonSegment, IonSegmentButton, IonTitle, IonToolbar, RouterLink, StatusPtPipe, StatusBadgeDirective, DestaqueDirective],
 })
 export class PersonagensPage implements OnInit {
   private api = inject(RickMortyApiService);
