@@ -17,20 +17,24 @@
         <p>{{ episodio.dataExibicao | date:'dd/MM/yyyy' }} · {{ episodio.personagens }} personagens</p>
       </ion-label>
     </ion-item>
+    } @empty {
+      <div class="ion-text-center ion-padding">Nenhum episódio encontrado.</div>
     }
   </ion-list>
 
-  <div class="paginacao">
-    <ion-button fill="outline" size="small" [disabled]="true">
-      <ion-icon slot="start" name="chevron-back-outline" aria-hidden="true"></ion-icon>
-      Anterior
-    </ion-button>
+  @if (episodiosExemplo.length > 0) {
+    <div class="paginacao">
+      <ion-button fill="outline" size="small" [disabled]="true">
+        <ion-icon slot="start" name="chevron-back-outline" aria-hidden="true"></ion-icon>
+        Anterior
+      </ion-button>
 
-    <span>Página 1</span>
+      <span>Página 1</span>
 
-    <ion-button fill="outline" size="small" [disabled]="true">
-      Próxima
-      <ion-icon slot="end" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
-    </ion-button>
-  </div>
+      <ion-button fill="outline" size="small" [disabled]="true">
+        Próxima
+        <ion-icon slot="end" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+      </ion-button>
+    </div>
+  }
 </ion-content>
