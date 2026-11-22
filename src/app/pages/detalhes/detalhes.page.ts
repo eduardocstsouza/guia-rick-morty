@@ -4,9 +4,12 @@ import { Subscription } from 'rxjs';
 import {
   IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle,
   IonContent, IonSpinner, IonCard, IonCardHeader,
-  IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonBadge
+  IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonBadge, IonIcon
 } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { heart, heartOutline } from 'ionicons/icons';
 import { StatusBadgeDirective } from '../../directives/status-badge.directive';
+import { FavoritosService } from '../../services/favoritos.service';
 import { RickMortyApiService } from '../../services/rick-morty-api.service';
 import { Personagem } from '../../models/personagem.model';
 import { StatusPtPipe } from '../../pipes/status-pt.pipe';
@@ -22,7 +25,7 @@ import { GeneroPtPipe } from '../../pipes/genero-pt.pipe';
     RouterLink,
     IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle,
     IonContent, IonSpinner, IonCard, IonCardHeader,
-    IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonBadge,
+    IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonBadge, IonIcon,
     StatusBadgeDirective, StatusPtPipe, EspeciePtPipe, GeneroPtPipe
   ],
 })
@@ -30,11 +33,20 @@ export class DetalhesPage implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private api = inject(RickMortyApiService);
   private cdr = inject(ChangeDetectorRef);
+  protected readonly favoritosService = inject(FavoritosService);
   private sub?: Subscription;
 
   personagem?: Personagem;
   carregando = true;
   erro = '';
+
+  constructor() {
+    addIcons({ heart, heartOutline });
+  }
+
+  alternarFavorito(personagem: Personagem): void {
+    this.favoritosService.alternar(personagem);
+  }
 
   ngOnInit() {
     this.sub = this.route.paramMap.subscribe((params: ParamMap) => {
