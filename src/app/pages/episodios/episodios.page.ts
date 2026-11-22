@@ -1,5 +1,6 @@
-import { UpperCasePipe, DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { DatePipe, UpperCasePipe } from '@angular/common';
+import type { OnInit } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   IonBadge,
   IonButton,
@@ -18,7 +19,9 @@ import { addIcons } from 'ionicons';
 import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons';
 
 import { DestaqueDirective } from '../../directives/destaque.directive';
+import type { Episodio } from '../../models/episodio.model';
 import { EpisodeCodePipe } from '../../pipes/episode-code.pipe';
+import { RickMortyApiService } from '../../services/rick-morty-api.service';
 
 @Component({
   selector: 'app-episodios',
@@ -43,25 +46,52 @@ import { EpisodeCodePipe } from '../../pipes/episode-code.pipe';
     DestaqueDirective,
   ],
 })
-export class EpisodiosPage {
-  readonly episodiosExemplo = [
-    {
-      id: 1,
-      codigo: 'S01E01',
-      nome: 'Pilot',
-      dataExibicao: new Date(2013, 11, 2),
-      personagens: 19,
-    },
-    {
-      id: 2,
-      codigo: 'S01E02',
-      nome: 'Lawnmower Dog',
-      dataExibicao: new Date(2013, 11, 9),
-      personagens: 19,
-    },
-  ];
+export class EpisodiosPage implements OnInit {
+  private readonly api = inject(RickMortyApiService);
+
+  readonly episodios = signal<Episodio[]>([]);
+  readonly paginaAtual = signal(1);
+  readonly totalPaginas = signal(1);
+  readonly carregando = signal(false);
+  readonly erro = signal('');
 
   constructor() {
     addIcons({ chevronBackOutline, chevronForwardOutline });
+  }
+
+  ngOnInit(): void {
+    this.carregar();
+  }
+
+  carregar(): void {
+    this.carregando.set(true);
+    this.erro.set('');
+    this.episodios.set([]);
+
+    this.api.getEpisodios(this.paginaAtual()).subscribe({
+      next: (resposta) => {
+        this.episodios.set(resposta.results);
+        this.totalPaginas.set(resposta.info.pages);
+        this.carregando.set(false);
+      },
+      error: () => {
+        this.erro.set('Erro ao carregar episódios. Tente novamente.');
+        this.carregando.set(false);
+      },
+    });
+  }
+
+  proximo(): void {
+    if (this.paginaAtual() < this.totalPaginas()) {
+      this.paginaAtual.update((pagina) => pagina + 1);
+      this.carregar();
+    }
+  }
+
+  anterior(): void {
+    if (this.paginaAtual() > 1) {
+      this.paginaAtual.update((pagina) => pagina - 1);
+      this.carregar();
+    }
   }
 }

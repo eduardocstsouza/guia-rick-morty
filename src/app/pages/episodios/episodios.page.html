@@ -8,30 +8,38 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  @if (carregando()) {
+    <div class="ion-text-center ion-padding">Carregando episódios...</div>
+  } @else if (erro()) {
+    <div class="ion-text-center ion-padding">{{ erro() }}</div>
+  }
+
   <ion-list [inset]="true">
-    @for (episodio of episodiosExemplo; track episodio.id) {
+    @for (episodio of episodios(); track episodio.id) {
     <ion-item appDestaque>
-      <ion-badge slot="start" color="secondary">{{ episodio.codigo | episodeCode }}</ion-badge>
+      <ion-badge slot="start" color="secondary">{{ episodio.episode | episodeCode }}</ion-badge>
       <ion-label>
-        <h2>{{ episodio.nome | uppercase }}</h2>
-        <p>{{ episodio.dataExibicao | date:'dd/MM/yyyy' }} · {{ episodio.personagens }} personagens</p>
+        <h2>{{ episodio.name | uppercase }}</h2>
+        <p>{{ episodio.air_date | date:'dd/MM/yyyy' }} · {{ episodio.characters.length }} personagens</p>
       </ion-label>
     </ion-item>
     } @empty {
-      <div class="ion-text-center ion-padding">Nenhum episódio encontrado.</div>
+      @if (!carregando() && !erro()) {
+        <div class="ion-text-center ion-padding">Nenhum episódio encontrado.</div>
+      }
     }
   </ion-list>
 
-  @if (episodiosExemplo.length > 0) {
+  @if (!carregando() && totalPaginas() > 1) {
     <div class="paginacao">
-      <ion-button fill="outline" size="small" [disabled]="true">
+      <ion-button fill="outline" size="small" (click)="anterior()" [disabled]="paginaAtual() === 1">
         <ion-icon slot="start" name="chevron-back-outline" aria-hidden="true"></ion-icon>
         Anterior
       </ion-button>
 
-      <span>Página 1</span>
+      <span>Página {{ paginaAtual() }} / {{ totalPaginas() }}</span>
 
-      <ion-button fill="outline" size="small" [disabled]="true">
+      <ion-button fill="outline" size="small" (click)="proximo()" [disabled]="paginaAtual() === totalPaginas()">
         Próxima
         <ion-icon slot="end" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
       </ion-button>
