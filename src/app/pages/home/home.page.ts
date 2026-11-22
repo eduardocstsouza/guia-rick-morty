@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import type { OnInit } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   IonButtons,
@@ -19,6 +20,8 @@ import { addIcons } from 'ionicons';
 import { heartOutline, peopleOutline, planetOutline, tvOutline } from 'ionicons/icons';
 
 import { DestaqueDirective } from '../../directives/destaque.directive';
+import { FavoritosService } from '../../services/favoritos.service';
+import { RickMortyApiService } from '../../services/rick-morty-api.service';
 
 @Component({
   selector: 'app-home',
@@ -42,7 +45,13 @@ import { DestaqueDirective } from '../../directives/destaque.directive';
     DestaqueDirective,
   ],
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  private readonly api = inject(RickMortyApiService);
+  protected readonly favoritosService = inject(FavoritosService);
+
+  /** null enquanto carrega (ou se a API falhar): a tela mostra "—". */
+  protected readonly totalPersonagens = signal<number | null>(null);
+
   readonly atalhos = [
     {
       titulo: 'Personagens',
@@ -69,5 +78,12 @@ export class HomePage {
 
   constructor() {
     addIcons({ planetOutline, peopleOutline, tvOutline, heartOutline });
+  }
+
+  ngOnInit(): void {
+    this.api.getTotalPersonagens().subscribe({
+      next: (total) => this.totalPersonagens.set(total),
+      error: () => this.totalPersonagens.set(null),
+    });
   }
 }
