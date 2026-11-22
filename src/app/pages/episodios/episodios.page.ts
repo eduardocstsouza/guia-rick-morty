@@ -17,6 +17,7 @@ import {
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons';
 
+import { DestaqueDirective } from '../../directives/destaque.directive';
 import { EpisodeCodePipe } from '../../pipes/episode-code.pipe';
 
 @Component({
@@ -39,6 +40,7 @@ import { EpisodeCodePipe } from '../../pipes/episode-code.pipe';
     EpisodeCodePipe,
     UpperCasePipe,
     DatePipe,
+    DestaqueDirective,
   ],
 })
 export class EpisodiosPage {

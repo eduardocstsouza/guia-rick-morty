@@ -10,7 +10,7 @@
 <ion-content class="ion-padding">
   <ion-list [inset]="true">
     @for (episodio of episodiosExemplo; track episodio.id) {
-    <ion-item>
+    <ion-item appDestaque>
       <ion-badge slot="start" color="secondary">{{ episodio.codigo | episodeCode }}</ion-badge>
       <ion-label>
         <h2>{{ episodio.nome | uppercase }}</h2>

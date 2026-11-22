@@ -5,3 +5,11 @@
   margin: 16px 0 8px;
   color: var(--ion-color-medium);
 }
+
+ion-item.app-destaque::part(native) {
+  transition: background-color 180ms ease;
+}
+
+ion-item.app-destaque-ativo::part(native) {
+  background-color: rgba(151, 206, 76, 0.22);
+}
