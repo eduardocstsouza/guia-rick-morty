@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/personagens"></ion-back-button>
@@ -8,67 +8,22 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card class="perfil-card">
-    <img
-      [src]="'https://rickandmortyapi.com/api/character/avatar/' + (id() || '1') + '.jpeg'"
-      alt="Imagem do personagem"
-    />
-
+  <div *ngIf="carregando" style="text-align:center; margin-top:40px;">
+    <ion-spinner></ion-spinner>
+    <p>Carregando...</p>
+  </div>
+  <p *ngIf="erro">{{ erro }}</p>
+  <ion-card *ngIf="personagem" style="max-width: 500px; margin: 0 auto;">
+    <img [src]="personagem.image" [alt]="personagem.name" style="width:100%; height:auto; display:block;" />
+    <ion-card-header>
+      <ion-card-title>{{ personagem.name }}</ion-card-title>
+      <ion-card-subtitle>{{ personagem.species }} - {{ personagem.status }}</ion-card-subtitle>
+    </ion-card-header>
     <ion-card-content>
-      <div class="perfil-cabecalho">
-        <h1>Personagem #{{ id() || '1' }}</h1>
-        <ion-badge color="primary">Status</ion-badge>
-      </div>
-
-      <ion-button expand="block" fill="outline" color="tertiary">
-        <ion-icon slot="start" name="heart-outline" aria-hidden="true"></ion-icon>
-        Favoritar
-      </ion-button>
+      <p><strong>Origem:</strong> {{ personagem.origin.name }}</p>
+      <p><strong>Localização:</strong> {{ personagem.location.name }}</p>
+      <p><strong>Gênero:</strong> {{ personagem.gender }}</p>
     </ion-card-content>
   </ion-card>
-
-  <ion-list [inset]="true">
-    <ion-item>
-      <ion-label>
-        <h3>Espécie</h3>
-        <p>—</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h3>Tipo</h3>
-        <p>—</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h3>Gênero</h3>
-        <p>—</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h3>Origem</h3>
-        <p>—</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h3>Última localização</h3>
-        <p>—</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h3>Criado em</h3>
-        <p>—</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h3>Episódios</h3>
-        <p>—</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-button expand="block" routerLink="/personagens">Voltar para lista</ion-button>
 </ion-content>
