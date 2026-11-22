@@ -31,7 +31,7 @@
           </ion-card-header>
           <ion-card-content>
             <div class="card-rodape">
-              <ion-badge color="primary">{{ personagem.status | statusPt }}</ion-badge>
+              <ion-badge [appStatusBadge]="personagem.status">{{ personagem.status | statusPt }}</ion-badge>
               <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
             </div>
           </ion-card-content>
