@@ -1,15 +1,18 @@
-import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import type { HttpErrorResponse } from '@angular/common/http';
+import type { OnInit } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonMenuButton, IonRow, IonSearchbar, IonSegment, IonSegmentButton, IonTitle, IonToolbar } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, chevronForwardOutline, heartOutline } from 'ionicons/icons';
+
 import { DestaqueDirective } from '../../directives/destaque.directive';
 import { StatusBadgeDirective } from '../../directives/status-badge.directive';
-import { RickMortyApiService } from '../../services/rick-morty-api.service';
-import { Personagem } from '../../models/personagem.model';
+import type { Personagem } from '../../models/personagem.model';
 import { StatusPtPipe } from '../../pipes/status-pt.pipe';
+import { RickMortyApiService } from '../../services/rick-morty-api.service';
 
 @Component({
   selector: 'app-personagens',
@@ -20,12 +23,13 @@ import { StatusPtPipe } from '../../pipes/status-pt.pipe';
 export class PersonagensPage implements OnInit {
   private api = inject(RickMortyApiService);
 
-  personagens: Personagem[] = [];
-  termoBusca = '';
-  filtroStatus = 'todos';
-  paginaAtual = 1;
-  totalPaginas = 1;
-  carregando = false;
+  personagens = signal<Personagem[]>([]);
+  termoBusca = signal('');
+  filtroStatus = signal('todos');
+  paginaAtual = signal(1);
+  totalPaginas = signal(1);
+  carregando = signal(false);
+  erro = signal('');
 
   private requisicaoAtual = 0;
   private timerBusca: any;
@@ -34,58 +38,61 @@ export class PersonagensPage implements OnInit {
     addIcons({ chevronBackOutline, chevronForwardOutline, heartOutline });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.carregar();
   }
 
-  carregar() {
-    this.carregando = true;
+  carregar(): void {
+    this.carregando.set(true);
+    this.personagens.set([]);
+    this.erro.set('');
     this.requisicaoAtual++;
     const minhaRequisicao = this.requisicaoAtual;
 
-    this.api.getPersonagens(this.paginaAtual, this.termoBusca, this.filtroStatus).subscribe({
+    this.api.getPersonagens(this.paginaAtual(), this.termoBusca(), this.filtroStatus()).subscribe({
       next: (res) => {
         if (minhaRequisicao !== this.requisicaoAtual) return;
-        this.personagens = res.results;
-        this.totalPaginas = res.info.pages;
-        this.carregando = false;
+        this.personagens.set(res.results);
+        this.totalPaginas.set(res.info.pages);
+        this.carregando.set(false);
       },
-      error: () => {
+      error: (error: HttpErrorResponse) => {
         if (minhaRequisicao !== this.requisicaoAtual) return;
-        this.personagens = [];
-        this.totalPaginas = 1;
-        this.carregando = false;
+        this.totalPaginas.set(1);
+        this.erro.set(error.status === 404 ? '' : 'Erro ao carregar personagens. Tente novamente.');
+        this.carregando.set(false);
       }
     });
   }
 
-  onBusca(event: any) {
-    this.termoBusca = event.detail.value ?? '';
+  onBusca(event: any): void {
+    this.termoBusca.set(event.detail.value ?? '');
     clearTimeout(this.timerBusca);
     this.timerBusca = setTimeout(() => {
-      this.paginaAtual = 1;
+      this.paginaAtual.set(1);
       this.carregar();
     }, 400);
   }
 
   // AGORA É CLICK DIRETO, SEM ionChange, SEM EVENTO
-  trocarStatus(novoStatus: string) {
-    if (this.filtroStatus === novoStatus) return;
-    this.filtroStatus = novoStatus;
-    this.paginaAtual = 1;
+  trocarStatus(novoStatus: string): void {
+    if (this.filtroStatus() === novoStatus) return;
+    clearTimeout(this.timerBusca);
+    this.filtroStatus.set(novoStatus);
+    this.paginaAtual.set(1);
     this.carregar();
   }
 
-  proximo() {
-    if (this.paginaAtual < this.totalPaginas) {
-      this.paginaAtual++;
+  proximo(): void {
+    if (this.paginaAtual() < this.totalPaginas()) {
+      this.paginaAtual.update((pagina) => pagina + 1);
       this.carregar();
     }
   }
 
-  anterior() {
-    if (this.paginaAtual > 1) {
-      this.paginaAtual--;
+  anterior(): void {
+    if (this.paginaAtual() > 1) {
+      this.paginaAtual.update((pagina) => pagina - 1);
       this.carregar();
     }
   }

@@ -9,9 +9,9 @@
 
 <ion-content class="ion-padding">
   <div class="filtros">
-    <ion-searchbar placeholder="Buscar personagem por nome..." [value]="termoBusca" (ionInput)="onBusca($event)"></ion-searchbar>
+    <ion-searchbar placeholder="Buscar personagem por nome..." [value]="termoBusca()" (ionInput)="onBusca($event)"></ion-searchbar>
 
-    <ion-segment [value]="filtroStatus" [scrollable]="true">
+    <ion-segment [value]="filtroStatus()" [scrollable]="true">
       <ion-segment-button value="todos" (click)="trocarStatus('todos')"><ion-label>Todos</ion-label></ion-segment-button>
       <ion-segment-button value="alive" (click)="trocarStatus('alive')"><ion-label>Vivos</ion-label></ion-segment-button>
       <ion-segment-button value="dead" (click)="trocarStatus('dead')"><ion-label>Mortos</ion-label></ion-segment-button>
@@ -19,9 +19,15 @@
     </ion-segment>
   </div>
 
+  @if (carregando()) {
+    <div class="ion-text-center ion-padding">Carregando personagens...</div>
+  } @else if (erro()) {
+    <div class="ion-text-center ion-padding">{{ erro() }}</div>
+  }
+
   <ion-grid>
     <ion-row>
-      @for (personagem of personagens; track personagem.id) {
+      @for (personagem of personagens(); track personagem.id) {
       <ion-col size="12" sizeMd="6" sizeLg="4">
         <ion-card button [routerLink]="['/personagens', personagem.id]" class="personagem-card" appDestaque>
           <img [src]="personagem.image" [alt]="personagem.name" loading="lazy" onerror="this.src='https://rickandmortyapi.com/api/character/avatar/1.jpeg'" />
@@ -37,21 +43,25 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
+      } @empty {
+        @if (!carregando() && !erro()) {
+          <ion-col size="12" class="ion-text-center ion-padding">
+            <p>Nenhum personagem encontrado.</p>
+          </ion-col>
+        }
       }
     </ion-row>
   </ion-grid>
 
-  @if (personagens.length === 0 && !carregando) {
-    <div class="ion-text-center ion-padding"><p>Nenhum personagem encontrado.</p></div>
+  @if (personagens().length > 0) {
+    <div class="paginacao">
+      <ion-button fill="outline" size="small" (click)="anterior()" [disabled]="paginaAtual() === 1">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon> Anterior
+      </ion-button>
+      <span>Página {{ paginaAtual() }} / {{ totalPaginas() }}</span>
+      <ion-button fill="outline" size="small" (click)="proximo()" [disabled]="paginaAtual() === totalPaginas()">
+        Próxima <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
   }
-
-  <div class="paginacao">
-    <ion-button fill="outline" size="small" (click)="anterior()" [disabled]="paginaAtual === 1">
-      <ion-icon slot="start" name="chevron-back-outline"></ion-icon> Anterior
-    </ion-button>
-    <span>Página {{ paginaAtual }} / {{ totalPaginas }}</span>
-    <ion-button fill="outline" size="small" (click)="proximo()" [disabled]="paginaAtual === totalPaginas">
-      Próxima <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-button>
-  </div>
 </ion-content>
