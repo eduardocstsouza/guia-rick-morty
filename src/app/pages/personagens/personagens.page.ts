@@ -11,10 +11,10 @@ import { chevronBackOutline, chevronForwardOutline, heart, heartOutline } from '
 import { DestaqueDirective } from '../../directives/destaque.directive';
 import { StatusBadgeDirective } from '../../directives/status-badge.directive';
 import type { Personagem } from '../../models/personagem.model';
+import { EspeciePtPipe } from '../../pipes/especie-pt.pipe';
 import { StatusPtPipe } from '../../pipes/status-pt.pipe';
 import { FavoritosService } from '../../services/favoritos.service';
 import { RickMortyApiService } from '../../services/rick-morty-api.service';
-import { EspeciePtPipe } from '../../pipes/especie-pt.pipe';
 
 @Component({
   selector: 'app-personagens',
