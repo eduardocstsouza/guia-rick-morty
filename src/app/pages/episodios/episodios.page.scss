@@ -11,5 +11,5 @@ ion-item.app-destaque::part(native) {
 }
 
 ion-item.app-destaque-ativo::part(native) {
-  background-color: rgba(151, 206, 76, 0.22);
+  background-color: rgba(var(--ion-color-primary-rgb), 0.22);
 }
