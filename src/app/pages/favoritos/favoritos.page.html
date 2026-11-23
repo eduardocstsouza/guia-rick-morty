@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @if (favoritosService.favoritos().length > 0) {
+  <ion-grid>
+    <ion-row>
+      @for (personagem of favoritosService.favoritos(); track personagem.id) {
+      <ion-col size="12" sizeMd="6" sizeLg="4">
+        <div class="personagem-item">
+          <ion-card button [routerLink]="['/personagens', personagem.id]" class="personagem-card" appDestaque>
+            <img [src]="personagem.image" [alt]="personagem.name" loading="lazy" />
+            <ion-card-header>
+              <ion-card-title>{{ personagem.name }}</ion-card-title>
+              <ion-card-subtitle>{{ personagem.species | especiePt }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-badge [appStatusBadge]="personagem.status">{{ personagem.status | statusPt }}</ion-badge>
+            </ion-card-content>
+          </ion-card>
+          <button
+            type="button"
+            class="btn-favorito"
+            [attr.aria-label]="'Remover ' + personagem.name + ' dos favoritos'"
+            (click)="remover(personagem.id)"
+          >
+            <ion-icon name="heart" aria-hidden="true"></ion-icon>
+          </button>
+        </div>
+      </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+  } @else {
+  <div class="estado-vazio">
+    <ion-icon name="heart-dislike-outline" aria-hidden="true"></ion-icon>
+    <h2>Nenhum favorito salvo</h2>
+    <p>Explore a lista de personagens e salve seus preferidos para acessá-los aqui.</p>
+    <ion-button routerLink="/personagens" color="primary">
+      <ion-icon slot="start" name="people-outline" aria-hidden="true"></ion-icon>
+      Explorar personagens
+    </ion-button>
+  </div>
+  }
+</ion-content>

@@ -1,0 +1,58 @@
+.filtros {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.personagem-card {
+  margin: 0 0 12px;
+
+  img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+
+  .card-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.personagem-item {
+  position: relative;
+}
+
+// Botão irmão do card (e não filho) para não aninhar elemento clicável dentro do link do card.
+.btn-favorito {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--ion-color-tertiary);
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 22px;
+  }
+}
+
+.paginacao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0 8px;
+  color: var(--ion-color-medium);
+}

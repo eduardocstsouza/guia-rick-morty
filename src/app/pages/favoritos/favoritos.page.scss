@@ -1,0 +1,65 @@
+.estado-vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 60vh;
+  padding: 24px 16px;
+
+  > ion-icon {
+    font-size: 56px;
+    color: var(--ion-color-tertiary);
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0 0 20px;
+    color: var(--ion-color-medium);
+    max-width: 320px;
+  }
+}
+
+.personagem-item {
+  position: relative;
+}
+
+.personagem-card {
+  margin: 0 0 12px;
+
+  img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+// Botão irmão do card (e não filho) para não aninhar elemento clicável dentro do link do card.
+.btn-favorito {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--ion-color-tertiary);
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 22px;
+  }
+}

@@ -1,2 +1,39 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+:root {
+  /* Verde Portal (cor principal) */
+  --ion-color-primary: #97ce4c;
+  --ion-color-primary-rgb: 151, 206, 76;
+  --ion-color-primary-contrast: #0b1215;
+  --ion-color-primary-contrast-rgb: 11, 18, 21;
+  --ion-color-primary-shade: #85b543;
+  --ion-color-primary-tint: #a1d35e;
+
+  /* Ciano Sci-Fi (cor secundária) */
+  --ion-color-secondary: #00b5cc;
+  --ion-color-secondary-rgb: 0, 181, 204;
+  --ion-color-secondary-contrast: #0b1215;
+  --ion-color-secondary-contrast-rgb: 11, 18, 21;
+  --ion-color-secondary-shade: #009fb4;
+  --ion-color-secondary-tint: #1abcd1;
+
+  /* Amarelo Morty (destaque terciário) */
+  --ion-color-tertiary: #f0e14a;
+  --ion-color-tertiary-rgb: 240, 225, 74;
+  --ion-color-tertiary-contrast: #0b1215;
+  --ion-color-tertiary-contrast-rgb: 11, 18, 21;
+  --ion-color-tertiary-shade: #d3c641;
+  --ion-color-tertiary-tint: #f2e45c;
+
+  /* Superfícies do tema escuro */
+  --ion-background-color: #0f1419;
+  --ion-background-color-rgb: 15, 20, 25;
+  --ion-text-color: #f1f5f9;
+  --ion-text-color-rgb: 241, 245, 249;
+  --ion-toolbar-background: #161d24;
+  --ion-toolbar-color: #f1f5f9;
+  --ion-card-background: #1a232c;
+  --ion-item-background: #1a232c;
+  --ion-border-color: #263240;
+}

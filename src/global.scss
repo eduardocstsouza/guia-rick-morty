@@ -32,6 +32,17 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+@import "@ionic/angular/css/palettes/dark.always.css";
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/*@import '@ionic/angular/css/palettes/dark.system.css';*/
+
+.app-destaque {
+  transition: transform 180ms ease, box-shadow 180ms ease, outline-color 180ms ease;
+  outline: 2px solid transparent;
+}
+
+.app-destaque-ativo {
+  transform: translateY(-3px);
+  outline-color: var(--ion-color-primary);
+  box-shadow: 0 8px 24px rgba(var(--ion-color-primary-rgb), 0.35);
+}
