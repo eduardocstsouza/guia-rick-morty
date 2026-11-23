@@ -44,5 +44,5 @@
 .app-destaque-ativo {
   transform: translateY(-3px);
   outline-color: var(--ion-color-primary);
-  box-shadow: 0 8px 24px rgba(151, 206, 76, 0.35);
+  box-shadow: 0 8px 24px rgba(var(--ion-color-primary-rgb), 0.35);
 }
