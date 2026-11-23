@@ -20,7 +20,7 @@
       <ion-badge slot="start" color="secondary">{{ episodio.episode | episodeCode }}</ion-badge>
       <ion-label>
         <h2>{{ episodio.name | uppercase }}</h2>
-        <p>{{ episodio.air_date | date:'dd/MM/yyyy' }} · {{ episodio.characters.length }} personagens</p>
+        <p>Cadastrado em {{ episodio.created | date:'dd/MM/yyyy' }} · {{ episodio.characters.length }} personagens</p>
       </ion-label>
     </ion-item>
     } @empty {
