@@ -4,7 +4,29 @@ import type { OnInit } from '@angular/core';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonMenuButton, IonRow, IonSearchbar, IonSegment, IonSegmentButton, IonTitle, IonToolbar } from '@ionic/angular';
+import {
+  IonBadge,
+  IonButton,
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonIcon,
+  IonLabel,
+  IonMenuButton,
+  IonRow,
+  IonSearchbar,
+  IonSegment,
+  IonSegmentButton,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, chevronForwardOutline, heart, heartOutline } from 'ionicons/icons';
 
@@ -20,7 +42,36 @@ import { RickMortyApiService } from '../../services/rick-morty-api.service';
   selector: 'app-personagens',
   templateUrl: './personagens.page.html',
   styleUrls: ['./personagens.page.scss'],
-  imports: [CommonModule, FormsModule, IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonMenuButton, IonRow, IonSearchbar, IonSegment, IonSegmentButton, IonTitle, IonToolbar, RouterLink, StatusPtPipe, EspeciePtPipe, StatusBadgeDirective, DestaqueDirective],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonBadge,
+    IonButton,
+    IonButtons,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
+    IonCol,
+    IonContent,
+    IonGrid,
+    IonHeader,
+    IonIcon,
+    IonLabel,
+    IonMenuButton,
+    IonRow,
+    IonSearchbar,
+    IonSegment,
+    IonSegmentButton,
+    IonTitle,
+    IonToolbar,
+    RouterLink,
+    StatusPtPipe,
+    EspeciePtPipe,
+    StatusBadgeDirective,
+    DestaqueDirective,
+  ],
 })
 export class PersonagensPage implements OnInit {
   private api = inject(RickMortyApiService);
@@ -64,7 +115,7 @@ export class PersonagensPage implements OnInit {
         this.totalPaginas.set(1);
         this.erro.set(error.status === 404 ? '' : 'Erro ao carregar personagens. Tente novamente.');
         this.carregando.set(false);
-      }
+      },
     });
   }
 

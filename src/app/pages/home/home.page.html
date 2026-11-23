@@ -15,8 +15,12 @@
   </div>
 
   <div class="contadores">
-    <ion-chip color="primary" [outline]="true"><ion-label>Personagens: {{ totalPersonagens() ?? '—' }}</ion-label></ion-chip>
-    <ion-chip color="tertiary" [outline]="true"><ion-label>Favoritos: {{ favoritosService.total() }}</ion-label></ion-chip>
+    <ion-chip color="primary" [outline]="true"
+      ><ion-label>Personagens: {{ totalPersonagens() ?? '—' }}</ion-label></ion-chip
+    >
+    <ion-chip color="tertiary" [outline]="true"
+      ><ion-label>Favoritos: {{ favoritosService.total() }}</ion-label></ion-chip
+    >
   </div>
 
   @for(atalho of atalhos; track atalho.rota){

@@ -3,9 +3,21 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import type { ParamMap } from '@angular/router';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
-  IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle,
-  IonContent, IonSpinner, IonCard, IonCardHeader,
-  IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonBadge, IonIcon
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonTitle,
+  IonContent,
+  IonSpinner,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonButton,
+  IonBadge,
+  IonIcon,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { heart, heartOutline } from 'ionicons/icons';
@@ -26,10 +38,25 @@ import { RickMortyApiService } from '../../services/rick-morty-api.service';
   standalone: true,
   imports: [
     RouterLink,
-    IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle,
-    IonContent, IonSpinner, IonCard, IonCardHeader,
-    IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonBadge, IonIcon,
-    StatusBadgeDirective, StatusPtPipe, EspeciePtPipe, GeneroPtPipe
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonBackButton,
+    IonTitle,
+    IonContent,
+    IonSpinner,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
+    IonButton,
+    IonBadge,
+    IonIcon,
+    StatusBadgeDirective,
+    StatusPtPipe,
+    EspeciePtPipe,
+    GeneroPtPipe,
   ],
 })
 export class DetalhesPage implements OnInit, OnDestroy {
@@ -73,7 +100,7 @@ export class DetalhesPage implements OnInit, OnDestroy {
         this.erro = 'Erro ao carregar personagem';
         this.carregando = false;
         this.cdr.detectChanges();
-      }
+      },
     });
   }
 

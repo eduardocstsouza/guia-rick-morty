@@ -20,9 +20,9 @@ describe('EpisodiosPage', () => {
   } as Episodio;
 
   const mockApi = {
-    getEpisodios: vi.fn().mockReturnValue(
-      of({ info: { count: 51, pages: 3, next: 'x', prev: null }, results: [episodio] }),
-    ),
+    getEpisodios: vi
+      .fn()
+      .mockReturnValue(of({ info: { count: 51, pages: 3, next: 'x', prev: null }, results: [episodio] })),
   };
 
   beforeEach(async () => {
