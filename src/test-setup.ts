@@ -2,6 +2,10 @@
 // Ionic components such as ion-menu and ion-split-pane query `window.matchMedia`,
 // and ion-segment / ion-searchbar use `ResizeObserver` / `IntersectionObserver`,
 // which jsdom does not implement.
+if (!HTMLElement.prototype.scrollTo) {
+  HTMLElement.prototype.scrollTo = () => undefined;
+}
+
 if (!window.matchMedia) {
   window.matchMedia = (query: string): MediaQueryList =>
     ({
@@ -34,6 +38,7 @@ if (!globalThis.IntersectionObserver) {
   globalThis.IntersectionObserver = class IntersectionObserver {
     readonly root = null;
     readonly rootMargin = '';
+    readonly scrollMargin = '';
     readonly thresholds = [];
     observe(): void {
       return undefined;
